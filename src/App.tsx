@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import '@aws-amplify/ui-react/styles.css'
 import '@fontsource/inter'
 import './App.css'
+import {View} from "@aws-amplify/ui-react";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+        <View
+            as="div"
+            ariaLabel="View example"
+            backgroundColor="var(--amplify-colors-white)"
+            borderRadius="6px"
+            border="1px solid var(--amplify-colors-black)"
+            boxShadow="3px 3px 5px 6px var(--amplify-colors-neutral-60)"
+            color="var(--amplify-colors-blue-60)"
+            height="4rem"
+            maxWidth="100%"
+            padding="1rem"
+            width="20rem"
+            onClick={() => alert('🏔 What a beautiful <View>! 🔭')}
+        >
+            {"I'm a <div>! 🤩"}
+        </View>
     </>
   )
 }
