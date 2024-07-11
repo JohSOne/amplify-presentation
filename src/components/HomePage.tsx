@@ -1,6 +1,9 @@
-import {Card, Collection, Flex} from '@aws-amplify/ui-react';
+import {Button, Card, Collection, Flex} from '@aws-amplify/ui-react';
 import {POICard} from '../ui-components';
 import {MapView} from "@aws-amplify/ui-react-geo";
+import {Marker} from 'react-map-gl'
+import {useState} from "react";
+import '@aws-amplify/ui-react-geo/styles.css';
 
 const items = [
     {
@@ -9,24 +12,37 @@ const items = [
         contentText: "This is the top of the mountain in the middle of the Gran Canaria island. It has 1956 m" +
             " and offers the best view of the island. 🔭",
         image: "src/assets/mountain.png",
-        coordinates: "28,01942° N, 15,64631° V"
+        coordinates: "27.962220, -15.571574"
     },
     {
         title: "Dunas de Maspalomas",
         aboveTitle: "Desert",
         contentText: "The short Sahara. 11 km of sand dunes to walk and astonish 🏜️",
         image: "src/assets/dunas.png",
-        coordinates: "27,74447° N, 15,57506° V"
+        coordinates: "27.740441, -15.581789"
     },
 
 ]
 export default function HomePage() {
+    const [{ latitude, longitude , zoom}, setMarkerLocation] = useState<{latitude:number, longitude:number, zoom:number}>({
+        latitude: 27.962220,
+        longitude: -15.571574,
+        zoom:5
+    });
+    const updateMarker = ({lat, long}) =>
+        setMarkerLocation({ latitude: lat, longitude: long, zoom:zoom });
+
+    const updateZoom = ({zm}) =>
+        setMarkerLocation({latitude:latitude, longitude: longitude, zoom:zm})
+
     return (
+        <>
         <Flex
+
+            width="100vw"
+            height="100vh"
             gap="10px"
             direction="row"
-            width="1700px"
-            height="1000px"
             justifyContent="flex-start"
             alignItems="flex-start"
             overflow="hidden"
@@ -37,7 +53,7 @@ export default function HomePage() {
             <Flex
                 gap="10px"
                 direction="column"
-                width="500px"
+                width="30%"
                 justifyContent="flex-start"
                 alignItems="center"
                 overflow="hidden"
@@ -59,7 +75,7 @@ export default function HomePage() {
                                     width: "70%"
                                 },
                                 POICard: {
-                                    onClick: () => alert(`access ${item.coordinates}`),
+                                    onClick: () => updateMarker({lat: item.coordinates.split(",")[0], long:item.coordinates.split(",")[1]}),
                                     style: {
                                         cursor: "pointer"
                                     },
@@ -81,20 +97,15 @@ export default function HomePage() {
 
             </Flex>
             <Flex
-                overflow="hidden"
-                grow="1"
-                shrink="1"
-                basis="0"
-                alignSelf="stretch"
-                position="relative"
                 backgroundColor="rgba(103,88,88,1)"
             />
-            <MapView initialViewState={{
-                longitude: 12.4,
-                latitude: 51.3,
-                zoom:5
-            }}>
+            <Button onClick={()=>updateZoom({zm:zoom+1})}>Zoom + </Button>
+            <Button onClick={()=>updateZoom({zm:zoom-1})}>Zoom -</Button>
+            <MapView viewState={{latitude:latitude, longitude:longitude, zoom:zoom}} >
+                <Marker longitude={longitude} latitude={latitude}/>
             </MapView>
-        </Flex>
+        </Flex>#
+
+    </>
     )
 }

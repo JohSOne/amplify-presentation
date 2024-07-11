@@ -1,7 +1,6 @@
 import { defineBackend } from '@aws-amplify/backend';
 import { auth } from './auth/resource';
 import { data } from './data/resource';
-import {CfnMap} from "aws-cdk-lib/aws-location";
 import {Policy, PolicyStatement} from "aws-cdk-lib/aws-iam";
 
 /**
@@ -11,6 +10,9 @@ const backend = defineBackend({
   auth,
   data,
 });
+
+/* If the resource is already created, just add the output file information*/
+/*
 
 const geoStack = backend.createStack("geo-stack");
 
@@ -29,8 +31,8 @@ const map = new CfnMap(geoStack, "Map", {
     },
   ],
 });
-
-// create an IAM policy to allow interacting with geo resource
+*/
+/*// create an IAM policy to allow interacting with geo resource
 const jmGeoPolicy = new Policy(geoStack, "GeoPolicy", {
   policyName: "JMGeoPolicy",
   statements: [
@@ -44,23 +46,24 @@ const jmGeoPolicy = new Policy(geoStack, "GeoPolicy", {
       resources: [map.attrArn],
     }),
   ],
-});
+});*/
 
 // apply the policy to the authenticated and unauthenticated roles
-backend.auth.resources.authenticatedUserIamRole.attachInlinePolicy(jmGeoPolicy);
-backend.auth.resources.unauthenticatedUserIamRole.attachInlinePolicy(jmGeoPolicy);
+/*backend.auth.resources.authenticatedUserIamRole.attachInlinePolicy(jmGeoPolicy);
+backend.auth.resources.unauthenticatedUserIamRole.attachInlinePolicy(jmGeoPolicy);*/
+
 
 // patch the map resource to the expected output configuration
 backend.addOutput({
   geo: {
-    aws_region: geoStack.region,
+    aws_region: "us-east-2",
     maps: {
       items: {
-        [map.mapName]: {
+        ["myMap"]: {
           style: "VectorEsriNavigation",
         },
       },
-      default: map.mapName,
+      default: "myMap",
     },
   },
 });
