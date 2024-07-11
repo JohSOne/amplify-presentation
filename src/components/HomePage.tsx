@@ -1,5 +1,6 @@
 import {Card, Collection, Flex} from '@aws-amplify/ui-react';
 import {POICard} from '../ui-components';
+import {MapView} from "@aws-amplify/ui-react-geo";
 
 const items = [
     {
@@ -88,6 +89,12 @@ export default function HomePage() {
                 position="relative"
                 backgroundColor="rgba(103,88,88,1)"
             />
+            <MapView initialViewState={{
+                longitude: 12.4,
+                latitude: 51.3,
+                zoom:5
+            }}>
+            </MapView>
         </Flex>
     )
 }
