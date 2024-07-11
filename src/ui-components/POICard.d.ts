@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { BadgeProps, DividerProps, FlexProps, IconProps, ImageProps, RatingProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
+import { DividerProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -23,19 +23,11 @@ export declare type POICardOverridesProps = {
     "Card Area"?: PrimitiveOverrideProps<FlexProps>;
     Title?: PrimitiveOverrideProps<FlexProps>;
     Frame?: PrimitiveOverrideProps<FlexProps>;
-    "Information about this product"?: PrimitiveOverrideProps<TextProps>;
-    Icon?: PrimitiveOverrideProps<ViewProps>;
-    Vector?: PrimitiveOverrideProps<IconProps>;
-    "Classic Long Sleeve T-Shirt"?: PrimitiveOverrideProps<TextProps>;
+    aboveTitle?: PrimitiveOverrideProps<TextProps>;
+    title?: PrimitiveOverrideProps<TextProps>;
     Divider?: PrimitiveOverrideProps<DividerProps>;
     Features?: PrimitiveOverrideProps<FlexProps>;
-    "Information about this product.38821931"?: PrimitiveOverrideProps<TextProps>;
-    "Information about this product.38821932"?: PrimitiveOverrideProps<TextProps>;
-    Badge?: PrimitiveOverrideProps<BadgeProps>;
-    "Bottom Row"?: PrimitiveOverrideProps<FlexProps>;
-    Rating38821935?: PrimitiveOverrideProps<FlexProps>;
-    Rating38821936?: PrimitiveOverrideProps<RatingProps>;
-    Reviews?: PrimitiveOverrideProps<TextProps>;
+    contentText?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type POICardProps = React.PropsWithChildren<Partial<FlexProps> & {
     overrides?: POICardOverridesProps | undefined | null;

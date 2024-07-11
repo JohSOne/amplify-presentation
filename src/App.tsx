@@ -1,28 +1,43 @@
 import '@aws-amplify/ui-react/styles.css'
 import '@fontsource/inter'
-import './App.css'
-import {View} from "@aws-amplify/ui-react";
+import {HomePage} from "./components";
+//import './App.css'
 
 function App() {
 
   return (
     <>
-        <View
-            as="div"
-            ariaLabel="View example"
-            backgroundColor="var(--amplify-colors-white)"
-            borderRadius="6px"
-            border="1px solid var(--amplify-colors-black)"
-            boxShadow="3px 3px 5px 6px var(--amplify-colors-neutral-60)"
-            color="var(--amplify-colors-blue-60)"
-            height="4rem"
-            maxWidth="100%"
-            padding="1rem"
-            width="20rem"
-            onClick={() => alert('🏔 What a beautiful <View>! 🔭')}
+        <HomePage />
+       {/* <Flex
+            width={"30%"}
         >
-            {"I'm a <div>! 🤩"}
-        </View>
+        <Card variation={"elevated"}>
+        <POICard overrides={{
+            image:{
+                src:"src/assets/mountain.png",
+            },
+            POICard:{
+                onClick:()=>alert("clicked⛰️"),
+                style:{
+                    cursor:"pointer"
+                }
+            },
+            title:{
+                children:"Pico de las Nieves"
+            },
+            aboveTitle:{
+                children:"Mountains in Gran Canaria"
+            },
+            contentText:{
+                children:"This is the top of the mountain in the middle of the Gran Canaria island. It has 1956 m" +
+                    " and offers the best view of the island. 🔭"
+            },
+            Badge:{
+                variation:"info"
+            }
+        }}/>
+        </Card>
+        </Flex>*/}
     </>
   )
 }
