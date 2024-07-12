@@ -29,6 +29,7 @@ export { default as NavBarHeader } from "./NavBarHeader";
 export { default as NavBarHeader2 } from "./NavBarHeader2";
 export { default as NavBarMobile } from "./NavBarMobile";
 export { default as NavBarSide } from "./NavBarSide";
+export { default as Navigation } from "./Navigation";
 export { default as POICard } from "./POICard";
 export { default as ProductCard } from "./ProductCard";
 export { default as ProductDetail } from "./ProductDetail";

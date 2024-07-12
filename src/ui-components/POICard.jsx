@@ -6,10 +6,61 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "./utils";
+import {
+  getOverrideProps,
+  getOverridesFromVariants,
+  mergeVariantsAndOverrides,
+} from "./utils";
 import { Divider, Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function POICard(props) {
-  const { overrides, ...rest } = props;
+  const { overrides: overridesProp, ...rest } = props;
+  const variants = [
+    {
+      overrides: {
+        image: {},
+        aboveTitle: {},
+        Frame: {},
+        title: {},
+        Title: {},
+        Divider: {},
+        contentText: {},
+        Features: {},
+        "Card Area": {},
+        POICard: {},
+      },
+      variantValues: { variation: "default" },
+    },
+    {
+      overrides: {
+        image: { width: "133px", height: "113.5px" },
+        aboveTitle: {
+          lineHeight: "17px",
+          width: "unset",
+          shrink: "1",
+          grow: "1",
+          basis: "0",
+          children: "Mountain",
+        },
+        Frame: { width: "123px", shrink: "0" },
+        title: { children: "Title" },
+        Title: { height: "unset" },
+        Divider: {},
+        contentText: { height: "48px" },
+        Features: { shrink: "0" },
+        "Card Area": { width: "133px", height: "unset" },
+        POICard: {
+          direction: "column",
+          justifyContent: "center",
+          alignItems: "flex-start",
+        },
+      },
+      variantValues: { variation: "mobile" },
+    },
+  ];
+  const overrides = mergeVariantsAndOverrides(
+    getOverridesFromVariants(variants, props),
+    overridesProp || {}
+  );
   return (
     <Flex
       gap="0"
@@ -20,6 +71,7 @@ export default function POICard(props) {
       alignItems="center"
       position="relative"
       padding="0px 0px 0px 0px"
+      display="flex"
       {...getOverrideProps(overrides, "POICard")}
       {...rest}
     >
@@ -47,6 +99,7 @@ export default function POICard(props) {
         position="relative"
         padding="0px 5px 0px 5px"
         backgroundColor="rgba(255,255,255,1)"
+        display="flex"
         {...getOverrideProps(overrides, "Card Area")}
       >
         <Flex
@@ -60,6 +113,7 @@ export default function POICard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
+          display="flex"
           {...getOverrideProps(overrides, "Title")}
         >
           <Flex
@@ -75,6 +129,7 @@ export default function POICard(props) {
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
+            display="flex"
             {...getOverrideProps(overrides, "Frame")}
           >
             <Text
@@ -144,6 +199,7 @@ export default function POICard(props) {
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 5px 0px"
+          display="flex"
           {...getOverrideProps(overrides, "Features")}
         >
           <Text

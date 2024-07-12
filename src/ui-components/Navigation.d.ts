@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { DividerProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, IconProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -17,21 +17,20 @@ export declare type Variant = {
     overrides: EscapeHatchProps;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
-export declare type POICardOverridesProps = {
-    POICard?: PrimitiveOverrideProps<FlexProps>;
-    image?: PrimitiveOverrideProps<ImageProps>;
-    "Card Area"?: PrimitiveOverrideProps<FlexProps>;
-    Title?: PrimitiveOverrideProps<FlexProps>;
-    Frame?: PrimitiveOverrideProps<FlexProps>;
-    aboveTitle?: PrimitiveOverrideProps<TextProps>;
-    title?: PrimitiveOverrideProps<TextProps>;
-    Divider?: PrimitiveOverrideProps<DividerProps>;
-    Features?: PrimitiveOverrideProps<FlexProps>;
-    contentText?: PrimitiveOverrideProps<TextProps>;
+export declare type NavigationOverridesProps = {
+    Navigation?: PrimitiveOverrideProps<FlexProps>;
+    navContainer?: PrimitiveOverrideProps<FlexProps>;
+    "Amplify Mark"?: PrimitiveOverrideProps<ViewProps>;
+    Union?: PrimitiveOverrideProps<IconProps>;
+    Button38965609?: PrimitiveOverrideProps<ButtonProps>;
+    titleContainer?: PrimitiveOverrideProps<FlexProps>;
+    siteTitle?: PrimitiveOverrideProps<TextProps>;
+    logContainer?: PrimitiveOverrideProps<FlexProps>;
+    Button38965599?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
-export declare type POICardProps = React.PropsWithChildren<Partial<FlexProps> & {
+export declare type NavigationProps = React.PropsWithChildren<Partial<FlexProps> & {
     variation?: "default" | "mobile";
 } & {
-    overrides?: POICardOverridesProps | undefined | null;
+    overrides?: NavigationOverridesProps | undefined | null;
 }>;
-export default function POICard(props: POICardProps): React.ReactElement;
+export default function Navigation(props: NavigationProps): React.ReactElement;
