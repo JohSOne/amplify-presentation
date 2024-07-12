@@ -53,3 +53,5 @@ amplifytools.xcconfig
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+/amplify/cli.json
+/amplify/team-provider-info.json
