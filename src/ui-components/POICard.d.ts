@@ -6,6 +6,7 @@
 
 import * as React from "react";
 import { DividerProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { MyIconProps } from "./MyIcon";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -24,10 +25,13 @@ export declare type POICardOverridesProps = {
     Title?: PrimitiveOverrideProps<FlexProps>;
     Frame?: PrimitiveOverrideProps<FlexProps>;
     aboveTitle?: PrimitiveOverrideProps<TextProps>;
+    editButton?: MyIconProps;
     title?: PrimitiveOverrideProps<TextProps>;
     Divider?: PrimitiveOverrideProps<DividerProps>;
     Features?: PrimitiveOverrideProps<FlexProps>;
     contentText?: PrimitiveOverrideProps<TextProps>;
+    Buttons?: PrimitiveOverrideProps<FlexProps>;
+    deleteButton?: MyIconProps;
 } & EscapeHatchProps;
 export declare type POICardProps = React.PropsWithChildren<Partial<FlexProps> & {
     variation?: "default" | "mobile";

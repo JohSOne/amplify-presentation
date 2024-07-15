@@ -1,15 +1,25 @@
-import {Button, Collection, Flex, useBreakpointValue} from '@aws-amplify/ui-react';
-import {POICard} from '../ui-components/index.js';
+import {Authenticator, Button, Card, Collection, Flex, Heading, useBreakpointValue} from '@aws-amplify/ui-react';
+import {POICard, Navigation} from '../ui-components';
 import {MapView} from "@aws-amplify/ui-react-geo";
 import {Marker} from 'react-map-gl'
-import {useState} from "react";
-import {Navigation} from '../ui-components'
+import {useEffect, useState} from "react";
+import { generateClient } from "aws-amplify/data";
+import type { Schema } from "../../amplify/data/resource";
+import {AddPOIDialog} from "./index.ts";
+import {IconClose} from "@aws-amplify/ui-react/internal";
+import {PoiCreateForm} from "../../ui-components";
+
+const client = generateClient<Schema>({
+    authMode:"userPool"
+}) // use this Data client for CRUDL requests
+type Poi = Schema['Poi']['type'];
+
 const items = [
     {
         title: "Pico de las Nieves",
         aboveTitle: "Mountains",
-        contentText: "This is the top of the mountain in the middle of the Gran Canaria island. It has 1956 m" +
-            " and offers the best view of the island. 🔭",
+        contentText: "This is the top of the mountain in the middle of the Gran Canaria island. It has 1956 m and" +
+            " offers the best view of the island. 🔭",
         image: "src/assets/mountain.png",
         coordinates: "27.962220, -15.571574"
     },
@@ -24,21 +34,79 @@ const items = [
 ]
 
 export default function HomePage() {
+    const [pois, setPois] = useState<Array<Schema["Poi"]["type"]>>([]);
+    const [showAddDialog, setShowAddDialog] = useState(false)
     const [{latitude, longitude, zoom}, setMarkerLocation] = useState({
         latitude: undefined,
         longitude: undefined,
         zoom: 1
     });
     const variation = useBreakpointValue({
-       small:'mobile',
-        medium:'default'
+        small: 'mobile',
+        medium: 'default'
     })
     const pointerZoom = 11
     const showTools = !!(latitude != undefined & longitude != undefined)
 
+    useEffect(() => {
+        const sub = client.models.Poi.observeQuery().subscribe({
+            next: ({ items, isSynced }) => {
+                setPois([...items]);
+            },
+        });
+        return () => sub.unsubscribe();
+    }, []);
+
+
+    function deletePoi(id: string) {
+        const result = confirm("Do you want to delete the POI?")
+        console.log(result)
+        if (result) {
+            let del = client.models.Poi.delete({id})
+            console.log(del)
+        }
+    }
     return (
-        <>
-            <Navigation variation={variation} width={"100vw"}/>
+        <Authenticator>
+            {({signOut})=>
+                <>
+            {/*{showAddDialog && <AddPOIDialog overrides={{
+                CloseButton:{
+                    onClick:()=>setShowAddDialog(false)
+                }
+            }}/>}*/}
+            {showAddDialog &&
+                <Card variation={"elevated"}
+                      direction={"column"}
+                      width={500}
+                      gap={"unset"}
+                      position={"fixed"}
+                      style={{zIndex: "1", transform: "translate(-50%, -50%)"}}
+                      top={"50%"}
+                      left={"50%"}>
+                    <Flex padding={"0 20px"}
+                          alignItems={"center"}>
+                        <Heading level={4}
+                                 width={"100%"}>
+                            Add New Poi
+                        </Heading>
+                        <Button variation={"warning"}
+                                onClick={()=> setShowAddDialog(false)}>
+                            <IconClose/>
+                        </Button>
+                    </Flex>
+                    <PoiCreateForm />
+                </Card>
+            }
+            <Navigation variation={variation} width={"100vw"}
+            overrides={{
+                Button38965609:{
+                    onClick:()=> setShowAddDialog(true)
+                },
+                Button38965599:{
+                    onClick:signOut
+                }
+            }}/>
             <Flex
                 width="100%"
                 height={"99vh"}
@@ -62,39 +130,49 @@ export default function HomePage() {
                     position="relative"
                     padding="7px 9px 7px 9px"
                     backgroundColor="rgba(195,181,181,1)"
+                    width={"30%"}
                 >
-                    <Collection items={items}>
+                    <Collection items={pois} >
                         {(item, index) => (
-                                <POICard key={index} variation={variation} width={"100%"} overrides={{
-                                    POICard: {
-                                        onClick: () => setMarkerLocation({
-                                            latitude: item.coordinates.split(",")[0],
-                                            longitude: item.coordinates.split(",")[1],
-                                            zoom: pointerZoom
-                                        }),
-                                        style: {
-                                            cursor: "pointer"
-                                        },
-                                    },
-                                    image: {
-                                        src: item.image,
-                                    },
-                                    title: {
-                                        children: item.title
-                                    },
-                                    aboveTitle: {
-                                        children: item.aboveTitle,
-                                    },
-                                    contentText: {
-                                        children: item.contentText,
-                                        overflow:"hidden"
+                            <POICard key={index} variation={variation} overrides={{
+                                image: {
+                                    src: item.image,
+                                    onClick: () => setMarkerLocation({
+                                        latitude: item.coordinates.split(",")[0],
+                                        longitude: item.coordinates.split(",")[1],
+                                        zoom: pointerZoom
+                                    }),
+                                    style: {
+                                        cursor: "pointer",
                                     }
-                                }}/>
+                                },
+                                title: {
+                                    children: item.title
+                                },
+                                aboveTitle: {
+                                    children: item.aboveTitle,
+                                },
+                                contentText: {
+                                    children: item.contentText,
+                                    overflow: "hidden"
+                                },
+                                editButton: {
+                                    style: {
+                                        cursor:"pointer"
+                                    },
+                                    onClick:()=>alert("Edit Me")
+                                },
+                                deleteButton: {
+                                    style: {
+                                        cursor:"pointer"
+                                    },
+                                    onClick:()=>deletePoi(item.id)
+                                }
+                            }}/>
                         )}
                     </Collection>
                 </Flex>
-                {showTools && <>
-
+                {showTools &&
                     <MapView latitude={latitude} longitude={longitude} zoom={zoom} style={{height: "100%"}}>
                         <Marker longitude={longitude} latitude={latitude}/>
                         <Flex direction={"column"} position={"absolute"} padding={20}>
@@ -137,10 +215,9 @@ export default function HomePage() {
                                 </svg>
                             </Button>
                         </Flex>
-                    </MapView>
-                </>}
+                    </MapView>}
                 {!showTools && <MapView style={{height: "100%"}}/>}
-            </Flex>
-        </>
+            </Flex></>}
+        </Authenticator>
     )
 }

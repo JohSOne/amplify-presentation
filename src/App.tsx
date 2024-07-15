@@ -8,9 +8,7 @@ Amplify.configure(output)
 
 function App() {
     return (
-        <>
-            <HomePage/>
-        </>
+                <HomePage />
     )
 }
 

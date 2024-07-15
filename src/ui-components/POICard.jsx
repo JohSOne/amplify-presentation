@@ -12,6 +12,7 @@ import {
   mergeVariantsAndOverrides,
 } from "./utils";
 import { Divider, Flex, Image, Text } from "@aws-amplify/ui-react";
+import MyIcon from "./MyIcon";
 export default function POICard(props) {
   const { overrides: overridesProp, ...rest } = props;
   const variants = [
@@ -19,12 +20,15 @@ export default function POICard(props) {
       overrides: {
         image: {},
         aboveTitle: {},
+        editButton: {},
         Frame: {},
         title: {},
         Title: {},
         Divider: {},
         contentText: {},
         Features: {},
+        deleteButton: {},
+        Buttons: {},
         "Card Area": {},
         POICard: {},
       },
@@ -41,12 +45,15 @@ export default function POICard(props) {
           basis: "0",
           children: "Mountain",
         },
+        editButton: {},
         Frame: { width: "123px", shrink: "0" },
         title: { children: "Title" },
         Title: { height: "unset" },
         Divider: {},
         contentText: { height: "48px" },
-        Features: { shrink: "0" },
+        Features: { height: "50px" },
+        deleteButton: {},
+        Buttons: {},
         "Card Area": { width: "133px", height: "unset" },
         POICard: {
           direction: "column",
@@ -153,6 +160,20 @@ export default function POICard(props) {
               children="Information about this product"
               {...getOverrideProps(overrides, "aboveTitle")}
             ></Text>
+            <MyIcon
+              width="24px"
+              height="24px"
+              display="block"
+              gap="unset"
+              alignItems="unset"
+              justifyContent="unset"
+              overflow="hidden"
+              shrink="0"
+              position="relative"
+              padding="0px 0px 0px 0px"
+              type="edit"
+              {...getOverrideProps(overrides, "editButton")}
+            ></MyIcon>
           </Flex>
           <Text
             fontFamily="Inter"
@@ -190,12 +211,10 @@ export default function POICard(props) {
           gap="8px"
           direction="column"
           width="unset"
-          height="unset"
+          height="60px"
           justifyContent="flex-start"
           alignItems="flex-start"
-          grow="1"
-          shrink="1"
-          basis="0"
+          shrink="0"
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 5px 0px"
@@ -225,6 +244,36 @@ export default function POICard(props) {
             children="Information about this product."
             {...getOverrideProps(overrides, "contentText")}
           ></Text>
+        </Flex>
+        <Flex
+          gap="0"
+          direction="row"
+          width="unset"
+          height="unset"
+          justifyContent="flex-end"
+          alignItems="flex-start"
+          overflow="hidden"
+          shrink="0"
+          alignSelf="stretch"
+          position="relative"
+          padding="0px 0px 0px 0px"
+          display="flex"
+          {...getOverrideProps(overrides, "Buttons")}
+        >
+          <MyIcon
+            width="24px"
+            height="24px"
+            display="block"
+            gap="unset"
+            alignItems="unset"
+            justifyContent="unset"
+            overflow="hidden"
+            shrink="0"
+            position="relative"
+            padding="0px 0px 0px 0px"
+            type="delete"
+            {...getOverrideProps(overrides, "deleteButton")}
+          ></MyIcon>
         </Flex>
       </Flex>
     </Flex>
