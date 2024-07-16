@@ -10,7 +10,7 @@ import { getOverrideProps } from "./utils";
 import Navigation from "./Navigation";
 import { Flex } from "@aws-amplify/ui-react";
 export default function Home(props) {
-  const { leftContainer, rightContainer, overrides, ...rest } = props;
+  const { rightContainer, leftContainer, overrides, ...rest } = props;
   return (
     <Flex
       gap="0"

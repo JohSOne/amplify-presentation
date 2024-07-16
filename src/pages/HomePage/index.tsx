@@ -1,12 +1,13 @@
 import React, {useState} from "react";
-import {Home, POICard} from "../../ui-components";
+import {Home, MyIcon, POICard} from "../../ui-components";
 import {items} from "../../assets/mock-data.ts";
-import {Collection, useBreakpointValue} from "@aws-amplify/ui-react";
+import {Button, Card, Collection, Flex, Heading, useBreakpointValue} from "@aws-amplify/ui-react";
 import {MapView} from "@aws-amplify/ui-react-geo";
 import {Marker} from "react-map-gl";
-import {PoiCreateForm, PoiUpdateForm} from "../../../ui-components";
+import {PoiCreateForm, PoiUpdateForm} from "../../forms";
 import type {Schema} from "../../../amplify/data/resource.ts";
 import {generateClient} from "aws-amplify/api";
+import {IconClose} from "@aws-amplify/ui-react/internal";
 
 const client = generateClient<Schema>({
     authMode: "userPool"
@@ -17,8 +18,17 @@ enum Dialog {
     Add,
     Edit
 }
-export default function HomePage() {
-    const [pois, setPois] = useState<Array<Poi[]>([]);
+
+function deletePoi(id: string) {
+    const result = confirm("Do you want to delete the POI?")
+    if (result) {
+        let del = client.models.Poi.delete({id})
+        console.log(del)
+    }
+}
+
+export default function HomePage(props) {
+    const [pois, setPois] = useState<Poi[]>([]);
     const [{latitude, longitude, zoom}, setMarkerLocation] = useState({
         latitude: undefined,
         longitude: undefined,
@@ -61,49 +71,47 @@ export default function HomePage() {
                              overflow: "hidden"
                          },
                          editButton: {
-                             style: {
-                                 cursor: "pointer"
-                             },
-                             onClick: () => alert("edit Button")
+                             children: <MyIcon type={"edit"}/>,
+                             onClick: () => setShowDialog({id: item.id, type: Dialog.Edit, show: true})
                          },
                          deleteButton: {
-                             style: {
-                                 cursor: "pointer"
-                             },
-                             onClick: () => alert("delete Button")
+                             children: <MyIcon type={"delete"}/>,
+                             onClick: () => deletePoi(item.id)
                          }
                      }}></POICard>}
     </Collection>
-    const mapElement = latitude ? <MapView latitude={latitude} longitude={longitude} zoom={zoom} style={{height: "100%"}}>
-        <Marker longitude={longitude} latitude={latitude}/>
-    </MapView> : <MapView />
-
-    function deletePoi(id: string) {
-        const result = confirm("Do you want to delete the POI?")
-        console.log(result)
-        if (result) {
-            let del = client.models.Poi.delete({id})
-            console.log(del)
-        }
-    }
+    const mapElement = latitude ?
+        <MapView latitude={latitude} longitude={longitude} zoom={zoom} style={{height: "100%"}}>
+            <Marker longitude={longitude} latitude={latitude}/>
+        </MapView> : <MapView/>
 
     let dialogSet;
 
     switch (showDialog.type) {
         case Dialog.Add:
-            dialogSet = {title:"Add New POI", component: <PoiCreateForm />};
+            dialogSet = {title: "Add New POI", component: <PoiCreateForm/>};
             break;
         case Dialog.Edit:
-            dialogSet = {title:"Edit POI", component: <PoiUpdateForm id={showDialog.id}/>}
+            dialogSet = {title: "Edit POI", component: <PoiUpdateForm id={showDialog.id}/>}
             break;
     }
 
     const homePageOverrides = {
+        Navigation: {
+            overrides: {
+                newButton: {
+                    onClick: () => setShowDialog({type: Dialog.Add, show: true})
+                },
+                logOutButton: {
+                    onClick: props.signOut
+                }
+            }
+        },
         MainContainer: {
             height: "100%",
         },
-        LeftContainer:{
-            width:"100%",
+        LeftContainer: {
+            width: "100%",
             children: mapElement
         },
         RightContainer: {
@@ -114,7 +122,30 @@ export default function HomePage() {
             children: poisElement
         }
     }
-    return (
+    return <>
+        {showDialog.show &&
+            <Card variation={"elevated"}
+                  direction={"column"}
+                  width={500}
+                  gap={"unset"}
+                  position={"fixed"}
+                  style={{zIndex: "1", transform: "translate(-50%, -50%)"}}
+                  top={"50%"}
+                  left={"50%"}>
+                <Flex padding={"0 20px"}
+                      alignItems={"center"}>
+                    <Heading level={4}
+                             width={"100%"}>
+                        {dialogSet.title}
+                    </Heading>
+                    <Button variation={"warning"}
+                            onClick={() => setShowDialog({...showDialog, show: false})}>
+                        <IconClose/>
+                    </Button>
+                </Flex>
+                {dialogSet.component}
+            </Card>
+        }
         <Home overrides={homePageOverrides} width={"100%"} height={"100vh"}/>
-    );
+    </>
 }

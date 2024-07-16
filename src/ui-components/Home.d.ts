@@ -30,8 +30,8 @@ export declare type HomeOverridesProps = {
     POICard48461368?: POICardProps;
 } & EscapeHatchProps;
 export declare type HomeProps = React.PropsWithChildren<Partial<FlexProps> & {
-    leftContainer?: React.ReactNode;
     rightContainer?: React.ReactNode;
+    leftContainer?: React.ReactNode;
 } & {
     overrides?: HomeOverridesProps | undefined | null;
 }>;

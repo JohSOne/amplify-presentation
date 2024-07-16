@@ -5,8 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
-import { MyIconProps } from "./MyIcon";
+import { ButtonProps, FlexProps, ImageProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
 } | null;
@@ -26,12 +25,12 @@ export declare type POICardOverridesProps = {
     Title?: PrimitiveOverrideProps<FlexProps>;
     Frame?: PrimitiveOverrideProps<FlexProps>;
     aboveTitle?: PrimitiveOverrideProps<TextProps>;
-    editButton?: MyIconProps;
+    editButton?: PrimitiveOverrideProps<ButtonProps>;
     title?: PrimitiveOverrideProps<TextProps>;
-    Features?: PrimitiveOverrideProps<FlexProps>;
+    Features?: PrimitiveOverrideProps<ViewProps>;
     contentText?: PrimitiveOverrideProps<TextProps>;
     Buttons?: PrimitiveOverrideProps<FlexProps>;
-    deleteButton?: MyIconProps;
+    deleteButton?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type POICardProps = React.PropsWithChildren<Partial<FlexProps> & {
     variation?: "default";

@@ -11,8 +11,7 @@ import {
   getOverridesFromVariants,
   mergeVariantsAndOverrides,
 } from "./utils";
-import { Flex, Image, Text } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
+import { Button, Flex, Image, Text, View } from "@aws-amplify/ui-react";
 export default function POICard(props) {
   const { overrides: overridesProp, ...rest } = props;
   const variants = [
@@ -44,7 +43,7 @@ export default function POICard(props) {
       gap="10px"
       direction="row"
       width="400px"
-      height="150px"
+      height="170px"
       justifyContent="flex-start"
       alignItems="center"
       overflow="hidden"
@@ -60,21 +59,22 @@ export default function POICard(props) {
       <Flex
         gap="0"
         direction="row"
-        width="unset"
-        height="unset"
+        width="150px"
+        height="150px"
         justifyContent="center"
         alignItems="center"
         overflow="hidden"
         shrink="0"
         position="relative"
+        borderRadius="10px"
         padding="0px 0px 0px 0px"
         backgroundColor="rgba(255,255,255,1)"
         display="flex"
         {...getOverrideProps(overrides, "imgContainer")}
       >
         <Image
-          width="125px"
-          height="125px"
+          width="195px"
+          height="165px"
           display="block"
           gap="unset"
           alignItems="unset"
@@ -122,9 +122,9 @@ export default function POICard(props) {
             gap="8px"
             direction="row"
             width="unset"
-            height="24px"
+            height="unset"
             justifyContent="flex-start"
-            alignItems="flex-start"
+            alignItems="flex-end"
             shrink="0"
             alignSelf="stretch"
             position="relative"
@@ -137,7 +137,7 @@ export default function POICard(props) {
               fontSize="10px"
               fontWeight="400"
               color="rgba(38,119,200,1)"
-              lineHeight="24px"
+              lineHeight="15px"
               textAlign="left"
               display="block"
               direction="column"
@@ -155,27 +155,24 @@ export default function POICard(props) {
               children="Category"
               {...getOverrideProps(overrides, "aboveTitle")}
             ></Text>
-            <MyIcon
-              width="24px"
-              height="24px"
-              display="block"
-              gap="unset"
-              alignItems="unset"
-              justifyContent="unset"
-              overflow="hidden"
+            <Button
+              width="unset"
+              height="unset"
+              padding="3px 6px 3px 6px"
               shrink="0"
-              position="relative"
-              padding="0px 0px 0px 0px"
-              type="edit"
+              size="small"
+              isDisabled={false}
+              variation="link"
+              children="Edit"
               {...getOverrideProps(overrides, "editButton")}
-            ></MyIcon>
+            ></Button>
           </Flex>
           <Text
             fontFamily="Inter"
             fontSize="12px"
-            fontWeight="700"
+            fontWeight="800"
             color="rgba(13,26,38,1)"
-            lineHeight="20px"
+            lineHeight="15px"
             textAlign="left"
             display="block"
             direction="column"
@@ -193,18 +190,17 @@ export default function POICard(props) {
             {...getOverrideProps(overrides, "title")}
           ></Text>
         </Flex>
-        <Flex
-          gap="8px"
-          direction="column"
+        <View
           width="unset"
-          height="60px"
-          justifyContent="flex-start"
-          alignItems="flex-start"
+          height="50px"
+          display="block"
+          gap="unset"
+          alignItems="unset"
+          justifyContent="unset"
           shrink="0"
           alignSelf="stretch"
           position="relative"
-          padding="0px 0px 5px 0px"
-          display="flex"
+          padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Features")}
         >
           <Text
@@ -212,54 +208,53 @@ export default function POICard(props) {
             fontSize="10px"
             fontWeight="400"
             color="rgba(92,102,112,1)"
-            lineHeight="24px"
+            lineHeight="15px"
             textAlign="left"
             display="block"
             direction="column"
             justifyContent="unset"
             letterSpacing="0px"
-            width="unset"
+            width="210px"
             height="unset"
             gap="unset"
             alignItems="unset"
-            shrink="0"
-            alignSelf="stretch"
-            position="relative"
+            position="absolute"
+            top="0px"
+            left="0px"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
             children="Information about this product."
             {...getOverrideProps(overrides, "contentText")}
           ></Text>
-        </Flex>
+        </View>
         <Flex
           gap="0"
           direction="row"
           width="unset"
           height="unset"
           justifyContent="flex-end"
-          alignItems="flex-start"
+          alignItems="center"
           overflow="hidden"
-          shrink="0"
+          grow="1"
+          shrink="1"
+          basis="0"
           alignSelf="stretch"
           position="relative"
           padding="0px 0px 0px 0px"
           display="flex"
           {...getOverrideProps(overrides, "Buttons")}
         >
-          <MyIcon
-            width="24px"
-            height="24px"
-            display="block"
-            gap="unset"
-            alignItems="unset"
-            justifyContent="unset"
-            overflow="hidden"
+          <Button
+            width="unset"
+            height="unset"
+            padding="3px 6px 3px 6px"
             shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            type="delete"
+            size="small"
+            isDisabled={false}
+            variation="warning"
+            children="Delete"
             {...getOverrideProps(overrides, "deleteButton")}
-          ></MyIcon>
+          ></Button>
         </Flex>
       </Flex>
     </Flex>

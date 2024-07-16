@@ -19,11 +19,11 @@ export default function Navigation(props) {
       overrides: {
         Union: {},
         "Amplify Mark": {},
-        Button48461972: {},
+        newButton: {},
         navContainer: {},
         siteTitle: {},
         titleContainer: {},
-        Button48462519: {},
+        logOutButton: {},
         Navigation: {},
       },
       variantValues: { variation: "default" },
@@ -32,11 +32,11 @@ export default function Navigation(props) {
       overrides: {
         Union: {},
         "Amplify Mark": {},
-        Button48461972: { size: "small" },
+        newButton: { size: "small" },
         navContainer: {},
         siteTitle: { fontSize: "14px", lineHeight: "21px" },
         titleContainer: {},
-        Button48462519: { size: "small" },
+        logOutButton: { size: "small" },
         Navigation: {},
       },
       variantValues: { variation: "mobile" },
@@ -123,7 +123,7 @@ export default function Navigation(props) {
           isDisabled={false}
           variation="default"
           children="New"
-          {...getOverrideProps(overrides, "Button48461972")}
+          {...getOverrideProps(overrides, "newButton")}
         ></Button>
       </Flex>
       <Flex
@@ -173,7 +173,7 @@ export default function Navigation(props) {
         isDisabled={false}
         variation="primary"
         children="Log Out"
-        {...getOverrideProps(overrides, "Button48462519")}
+        {...getOverrideProps(overrides, "logOutButton")}
       ></Button>
     </Flex>
   );

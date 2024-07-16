@@ -22,10 +22,10 @@ export declare type NavigationOverridesProps = {
     navContainer?: PrimitiveOverrideProps<FlexProps>;
     "Amplify Mark"?: PrimitiveOverrideProps<ViewProps>;
     Union?: PrimitiveOverrideProps<IconProps>;
-    Button48461972?: PrimitiveOverrideProps<ButtonProps>;
+    newButton?: PrimitiveOverrideProps<ButtonProps>;
     titleContainer?: PrimitiveOverrideProps<FlexProps>;
     siteTitle?: PrimitiveOverrideProps<TextProps>;
-    Button48462519?: PrimitiveOverrideProps<ButtonProps>;
+    logOutButton?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type NavigationProps = React.PropsWithChildren<Partial<FlexProps> & {
     variation?: "default" | "mobile";
