@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Home, MyIcon, POICard} from "../../ui-components";
 import {items} from "../../assets/mock-data.ts";
 import {Button, Card, Collection, Flex, Heading, useBreakpointValue} from "@aws-amplify/ui-react";
@@ -38,13 +38,11 @@ export default function HomePage(props) {
         type: Dialog.Add,
         show: false
     })
-    const showTools = !!(latitude != undefined & longitude != undefined)
     const variation = useBreakpointValue({
         small: 'mobile',
         medium: 'default'
     })
-
-    const poisElement = <Collection items={items}>
+    const poisElement = <Collection items={pois}>
         {(item, index) =>
             <POICard key={index}
                      className={"poiCard"}
@@ -122,6 +120,17 @@ export default function HomePage(props) {
             children: poisElement
         }
     }
+
+    useEffect(() => {
+        const sub = client.models.Poi.observeQuery().subscribe({
+            next: ({items, isSynced}) => {
+                setPois([...items]);
+            },
+        });
+        return () => sub.unsubscribe();
+    }, []);
+
+
     return <>
         {showDialog.show &&
             <Card variation={"elevated"}
