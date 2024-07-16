@@ -55,3 +55,4 @@ amplify_outputs*
 amplifyconfiguration*
 /amplify/cli.json
 /amplify/team-provider-info.json
+/src/components/HomePageGarbage.tsx

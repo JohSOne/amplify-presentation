@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { DividerProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 import { MyIconProps } from "./MyIcon";
 export declare type EscapeHatchProps = {
     [elementHierarchy: string]: Record<string, unknown>;
@@ -20,6 +20,7 @@ export declare type Variant = {
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type POICardOverridesProps = {
     POICard?: PrimitiveOverrideProps<FlexProps>;
+    imgContainer?: PrimitiveOverrideProps<FlexProps>;
     image?: PrimitiveOverrideProps<ImageProps>;
     "Card Area"?: PrimitiveOverrideProps<FlexProps>;
     Title?: PrimitiveOverrideProps<FlexProps>;
@@ -27,14 +28,13 @@ export declare type POICardOverridesProps = {
     aboveTitle?: PrimitiveOverrideProps<TextProps>;
     editButton?: MyIconProps;
     title?: PrimitiveOverrideProps<TextProps>;
-    Divider?: PrimitiveOverrideProps<DividerProps>;
     Features?: PrimitiveOverrideProps<FlexProps>;
     contentText?: PrimitiveOverrideProps<TextProps>;
     Buttons?: PrimitiveOverrideProps<FlexProps>;
     deleteButton?: MyIconProps;
 } & EscapeHatchProps;
 export declare type POICardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    variation?: "default" | "mobile";
+    variation?: "default";
 } & {
     overrides?: POICardOverridesProps | undefined | null;
 }>;

@@ -19,12 +19,11 @@ export default function Navigation(props) {
       overrides: {
         Union: {},
         "Amplify Mark": {},
-        Button38965609: {},
+        Button48461972: {},
         navContainer: {},
         siteTitle: {},
         titleContainer: {},
-        Button38965599: {},
-        logContainer: {},
+        Button48462519: {},
         Navigation: {},
       },
       variantValues: { variation: "default" },
@@ -33,12 +32,11 @@ export default function Navigation(props) {
       overrides: {
         Union: {},
         "Amplify Mark": {},
-        Button38965609: { size: "small" },
+        Button48461972: { size: "small" },
         navContainer: {},
         siteTitle: { fontSize: "14px", lineHeight: "21px" },
         titleContainer: {},
-        Button38965599: { size: "small" },
-        logContainer: {},
+        Button48462519: { size: "small" },
         Navigation: {},
       },
       variantValues: { variation: "mobile" },
@@ -123,9 +121,9 @@ export default function Navigation(props) {
           shrink="0"
           size="large"
           isDisabled={false}
-          variation="warning"
-          children="New POI"
-          {...getOverrideProps(overrides, "Button38965609")}
+          variation="default"
+          children="New"
+          {...getOverrideProps(overrides, "Button48461972")}
         ></Button>
       </Flex>
       <Flex
@@ -163,34 +161,20 @@ export default function Navigation(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="This a Points of Interest Collection "
+          children="The Points of Interest Collection "
           {...getOverrideProps(overrides, "siteTitle")}
         ></Text>
       </Flex>
-      <Flex
-        gap="8px"
-        direction="row"
+      <Button
         width="unset"
         height="unset"
-        justifyContent="flex-start"
-        alignItems="flex-start"
         shrink="0"
-        position="relative"
-        padding="0px 0px 0px 0px"
-        display="flex"
-        {...getOverrideProps(overrides, "logContainer")}
-      >
-        <Button
-          width="unset"
-          height="unset"
-          shrink="0"
-          size="default"
-          isDisabled={false}
-          variation="primary"
-          children="Log Out"
-          {...getOverrideProps(overrides, "Button38965599")}
-        ></Button>
-      </Flex>
+        size="large"
+        isDisabled={false}
+        variation="primary"
+        children="Log Out"
+        {...getOverrideProps(overrides, "Button48462519")}
+      ></Button>
     </Flex>
   );
 }

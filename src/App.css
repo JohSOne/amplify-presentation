@@ -1,6 +1,22 @@
-#root {
+.root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+.rightContainer{
+  right: 1px;
+  top: 1px;
+}
+
+.poiCard:hover{
+  right: 20px;
+  animation-name: hoverCard;
+  animation-duration: .5s;
+}
+
+@keyframes hoverCard {
+  from{right:0px}
+  to{right: 20px}
 }

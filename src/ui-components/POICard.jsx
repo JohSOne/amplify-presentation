@@ -11,7 +11,7 @@ import {
   getOverridesFromVariants,
   mergeVariantsAndOverrides,
 } from "./utils";
-import { Divider, Flex, Image, Text } from "@aws-amplify/ui-react";
+import { Flex, Image, Text } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function POICard(props) {
   const { overrides: overridesProp, ...rest } = props;
@@ -19,12 +19,12 @@ export default function POICard(props) {
     {
       overrides: {
         image: {},
+        imgContainer: {},
         aboveTitle: {},
         editButton: {},
         Frame: {},
         title: {},
         Title: {},
-        Divider: {},
         contentText: {},
         Features: {},
         deleteButton: {},
@@ -34,35 +34,6 @@ export default function POICard(props) {
       },
       variantValues: { variation: "default" },
     },
-    {
-      overrides: {
-        image: { width: "133px", height: "113.5px" },
-        aboveTitle: {
-          lineHeight: "17px",
-          width: "unset",
-          shrink: "1",
-          grow: "1",
-          basis: "0",
-          children: "Mountain",
-        },
-        editButton: {},
-        Frame: { width: "123px", shrink: "0" },
-        title: { children: "Title" },
-        Title: { height: "unset" },
-        Divider: {},
-        contentText: { height: "48px" },
-        Features: { height: "50px" },
-        deleteButton: {},
-        Buttons: {},
-        "Card Area": { width: "133px", height: "unset" },
-        POICard: {
-          direction: "column",
-          justifyContent: "center",
-          alignItems: "flex-start",
-        },
-      },
-      variantValues: { variation: "mobile" },
-    },
   ];
   const overrides = mergeVariantsAndOverrides(
     getOverridesFromVariants(variants, props),
@@ -70,41 +41,65 @@ export default function POICard(props) {
   );
   return (
     <Flex
-      gap="0"
+      gap="10px"
       direction="row"
-      width="unset"
-      height="unset"
+      width="400px"
+      height="150px"
       justifyContent="flex-start"
       alignItems="center"
+      overflow="hidden"
       position="relative"
-      padding="0px 0px 0px 0px"
+      boxShadow="0px 4px 12px rgba(0.05000000074505806, 0.10000000149011612, 0.15000000596046448, 0.25)"
+      borderRadius="10px"
+      padding="0px 10px 0px 10px"
+      backgroundColor="rgba(255,255,255,1)"
       display="flex"
       {...getOverrideProps(overrides, "POICard")}
       {...rest}
     >
-      <Image
-        width="200px"
-        height="150px"
-        display="block"
-        gap="unset"
-        alignItems="unset"
-        justifyContent="unset"
+      <Flex
+        gap="0"
+        direction="row"
+        width="unset"
+        height="unset"
+        justifyContent="center"
+        alignItems="center"
+        overflow="hidden"
         shrink="0"
         position="relative"
         padding="0px 0px 0px 0px"
-        objectFit="cover"
-        {...getOverrideProps(overrides, "image")}
-      ></Image>
+        backgroundColor="rgba(255,255,255,1)"
+        display="flex"
+        {...getOverrideProps(overrides, "imgContainer")}
+      >
+        <Image
+          width="125px"
+          height="125px"
+          display="block"
+          gap="unset"
+          alignItems="unset"
+          justifyContent="unset"
+          shrink="0"
+          position="relative"
+          borderRadius="10px"
+          padding="0px 0px 0px 0px"
+          objectFit="cover"
+          {...getOverrideProps(overrides, "image")}
+        ></Image>
+      </Flex>
       <Flex
-        gap="4px"
+        gap="5px"
         direction="column"
-        width="200px"
-        height="150px"
+        width="unset"
+        height="unset"
         justifyContent="flex-start"
         alignItems="flex-start"
-        shrink="0"
+        grow="1"
+        shrink="1"
+        basis="0"
+        alignSelf="stretch"
         position="relative"
-        padding="0px 5px 0px 5px"
+        padding="5px 5px 5px 5px"
         backgroundColor="rgba(255,255,255,1)"
         display="flex"
         {...getOverrideProps(overrides, "Card Area")}
@@ -113,7 +108,7 @@ export default function POICard(props) {
           gap="0"
           direction="column"
           width="unset"
-          height="44px"
+          height="unset"
           justifyContent="flex-start"
           alignItems="flex-start"
           shrink="0"
@@ -127,12 +122,10 @@ export default function POICard(props) {
             gap="8px"
             direction="row"
             width="unset"
-            height="unset"
+            height="24px"
             justifyContent="flex-start"
             alignItems="flex-start"
-            grow="1"
-            shrink="1"
-            basis="0"
+            shrink="0"
             alignSelf="stretch"
             position="relative"
             padding="0px 0px 0px 0px"
@@ -149,15 +142,17 @@ export default function POICard(props) {
               display="block"
               direction="column"
               justifyContent="unset"
-              width="159px"
+              width="unset"
               height="unset"
               gap="unset"
               alignItems="unset"
-              shrink="0"
+              grow="1"
+              shrink="1"
+              basis="0"
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Information about this product"
+              children="Category"
               {...getOverrideProps(overrides, "aboveTitle")}
             ></Text>
             <MyIcon
@@ -194,19 +189,10 @@ export default function POICard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="Classic Long Sleeve T-Shirt"
+            children="Title"
             {...getOverrideProps(overrides, "title")}
           ></Text>
         </Flex>
-        <Divider
-          width="unset"
-          height="1px"
-          shrink="0"
-          alignSelf="stretch"
-          size="small"
-          orientation="horizontal"
-          {...getOverrideProps(overrides, "Divider")}
-        ></Divider>
         <Flex
           gap="8px"
           direction="column"
