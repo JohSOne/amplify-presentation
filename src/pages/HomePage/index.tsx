@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Home, MyIcon, POICard} from "../../ui-components";
-import {items} from "../../assets/mock-data.ts";
+import {Home, MyIcon, POICard} from "../../ui-components/index.js";
 import {Button, Card, Collection, Flex, Heading, useBreakpointValue} from "@aws-amplify/ui-react";
 import {MapView} from "@aws-amplify/ui-react-geo";
 import {Marker} from "react-map-gl";
@@ -22,7 +21,7 @@ enum Dialog {
 function deletePoi(id: string) {
     const result = confirm("Do you want to delete the POI?")
     if (result) {
-        let del = client.models.Poi.delete({id})
+        const del = client.models["Poi"].delete({id})
         console.log(del)
     }
 }
@@ -123,7 +122,8 @@ export default function HomePage(props) {
     }
 
     useEffect(() => {
-        const sub = client.models.Poi.observeQuery().subscribe({
+        console.log(client.models)
+        const sub = client.models["Poi"].observeQuery().subscribe({
             next: ({items}) => {
                 setPois([...items]);
             },
