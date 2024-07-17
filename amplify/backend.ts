@@ -13,7 +13,6 @@ const backend = defineBackend({
 });
 // Geo Resource
 const geoStack = backend.createStack("geo-stack");
-/*
 // create a location services map
 const map = new CfnMap(geoStack, "Map", {
   mapName: "PoiMap",
@@ -29,7 +28,6 @@ const map = new CfnMap(geoStack, "Map", {
     },
   ],
 });
-*/
 // create an IAM policy to allow interacting with geo resource
 const myGeoPolicy = new Policy(geoStack, "GeoPolicy", {
   policyName: "JMGeoPolicy",
@@ -41,7 +39,7 @@ const myGeoPolicy = new Policy(geoStack, "GeoPolicy", {
         "geo:GetMapGlyphs",
         "geo:GetMapStyleDescriptor",
       ],
-      resources: ["arn:aws:geo:us-east-2:631103944286:map/PoiMap"],
+      resources: [map.attrArn],
     }),
   ],
 });
