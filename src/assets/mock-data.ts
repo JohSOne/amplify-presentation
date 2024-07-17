@@ -14,5 +14,11 @@ export const items = [
         image: "src/assets/dunas.png",
         coordinates: "27.740441, -15.581789"
     },
-
+    {
+        title: "Anfi del Mar",
+        aboveTitle: "Beach",
+        contentText: "An Amazing Beach with special Park/Terrace for weddings 🏖️💍",
+        image: "src/assets/anfi.png",
+        coordinates: "27.77301, -15.69730"
+    }
 ]

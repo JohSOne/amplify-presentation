@@ -96,6 +96,7 @@ export default function HomePage(props) {
 
     const homePageOverrides = {
         Navigation: {
+            variation:variation,
             overrides: {
                 newButton: {
                     onClick: () => setShowDialog({type: Dialog.Add, show: true})
@@ -123,7 +124,7 @@ export default function HomePage(props) {
 
     useEffect(() => {
         const sub = client.models.Poi.observeQuery().subscribe({
-            next: ({items, isSynced}) => {
+            next: ({items}) => {
                 setPois([...items]);
             },
         });
