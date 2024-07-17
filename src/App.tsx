@@ -10,8 +10,9 @@ Amplify.configure(output);
 
 export default function App() {
     return (
-        <Authenticator>
+        /*<Authenticator>
             {({signOut})=> <HomePage signOut={signOut}/>}
-        </Authenticator>
+        </Authenticator>*/
+        <></>
     )
 }
