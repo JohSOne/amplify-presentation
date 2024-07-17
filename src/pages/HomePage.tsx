@@ -1,7 +1,7 @@
 import {Home, POICard} from "../figma-components/index.js";
 import React from "react";
 import {Collection, Image} from "@aws-amplify/ui-react";
-import {items} from "../assets/mock-data.ts";
+import {iPoiCard, items} from "../assets/mock-data.ts";
 
 export default function HomePage() {
     function handleDelte() {
@@ -22,7 +22,7 @@ export default function HomePage() {
 
 
     const cardCollection = <Collection items={items}>
-        {(item, index) => {
+        {(item:iPoiCard, index) => {
             console.log(cardOverrides({
                 image: item.image,
                 title: item.title,

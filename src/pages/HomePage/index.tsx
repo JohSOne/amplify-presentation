@@ -7,6 +7,7 @@ import {PoiCreateForm, PoiUpdateForm} from "../../forms";
 import type {Schema} from "../../../amplify/data/resource.ts";
 import {generateClient} from "aws-amplify/api";
 import {IconClose} from "@aws-amplify/ui-react/internal";
+import {iPoiCard} from "../../assets/mock-data.ts";
 
 const client = generateClient<Schema>({
     authMode: "userPool"
@@ -28,9 +29,9 @@ function deletePoi(id: string) {
 
 export default function HomePage(props) {
     const [pois, setPois] = useState<Poi[]>([]);
-    const [{latitude, longitude, zoom}, setMarkerLocation] = useState({
-        latitude: undefined,
-        longitude: undefined,
+    const [{latitude, longitude, zoom}, setMarkerLocation] = useState<{latitude:number, longitude:number, zoom:number}>({
+        latitude: 0,
+        longitude: 0,
         zoom: 1
     });
     const [showDialog, setShowDialog] = useState<{ id?: string, type: Dialog, show: boolean }>({
@@ -42,20 +43,20 @@ export default function HomePage(props) {
         medium: 'default'
     })
     const poisElement = <Collection items={pois}>
-        {(item, index) =>
+        {(item:iPoiCard & {id:string}, index) =>
             <POICard key={index}
                      className={"poiCard"}
                      overrides={{
                          image: {
                              src: item.image,
-                             onClick: () => setMarkerLocation({
-                                 latitude: item.coordinates.split(",")[0],
-                                 longitude: item.coordinates.split(",")[1],
-                                 zoom: 11
-                             }),
                              style: {
                                  cursor: "pointer",
-                             }
+                             },
+                             onClick: () => setMarkerLocation({
+                                 latitude: Number(item.coordinates.split(",")[0]),
+                                 longitude: Number(item.coordinates.split(",")[1]),
+                                 zoom: 11
+                             }),
                          },
                          title: {
                              children: item.title

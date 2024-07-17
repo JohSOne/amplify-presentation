@@ -1,4 +1,4 @@
-export const items = [
+export const items:iPoiCard[] = [
     {
         title: "Pico de las Nieves",
         aboveTitle: "Mountains",
@@ -22,3 +22,11 @@ export const items = [
         coordinates: "27.77301, -15.69730"
     }
 ]
+
+export interface iPoiCard {
+    title: string,
+    aboveTitle: string
+    contentText: string,
+    image: string,
+    coordinates: string
+}
