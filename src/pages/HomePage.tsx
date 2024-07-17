@@ -40,7 +40,7 @@ export default function HomePage() {
         }}
     </Collection>
     console.log(cardCollection)
-    const cardOverrides = (props) => {
+    const cardOverrides = (props:{image:string,title:string, aboveTitle:string, contentText:string}) => {
         return {
             className: "poiCard",
             overrides: {
