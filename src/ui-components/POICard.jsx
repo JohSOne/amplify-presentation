@@ -77,6 +77,7 @@ export default function POICard(props) {
         borderRadius="10px"
         objectFit="cover"
         alt=""
+        src={"/img.png"}
         {...getOverrideProps(overrides, "image")}
       />
     </Flex>
@@ -128,9 +129,9 @@ export default function POICard(props) {
             basis="0"
             position="relative"
             whiteSpace="pre-wrap"
+            children={"Category"}
             {...getOverrideProps(overrides, "aboveTitle")}
           >
-            Category
           </Text>
           <Button
             padding="3px 6px 3px 6px"
@@ -138,9 +139,9 @@ export default function POICard(props) {
             size="small"
             isDisabled={false}
             variation="link"
+            children={"Edit"}
             {...getOverrideProps(overrides, "editButton")}
           >
-            Edit
           </Button>
         </Flex>
         <Text
@@ -155,9 +156,9 @@ export default function POICard(props) {
           alignSelf="stretch"
           position="relative"
           whiteSpace="pre-wrap"
+          children={"Title"}
           {...getOverrideProps(overrides, "title")}
         >
-          Title
         </Text>
       </Flex>
       <Flex
@@ -182,9 +183,9 @@ export default function POICard(props) {
           top="0px"
           left="0px"
           whiteSpace="pre-wrap"
+          children={"Information about this product."}
           {...getOverrideProps(overrides, "contentText")}
         >
-          Information about this product.
         </Text>
       </Flex>
       <Flex
@@ -205,9 +206,9 @@ export default function POICard(props) {
           size="small"
           isDisabled={false}
           variation="link"
+          children={"Delete"}
           {...getOverrideProps(overrides, "deleteButton")}
         >
-          Delete
         </Button>
       </Flex>
     </Flex>
