@@ -21,7 +21,7 @@ export default function HomePage() {
     }
 
 
-    const cardCollection = <Collection items={items}>
+    const cardCollection = <Collection items={items} type={"list"}>
         {(item:iPoiCard, index) => {
             console.log(cardOverrides({
                 image: item.image,

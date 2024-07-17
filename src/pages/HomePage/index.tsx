@@ -42,7 +42,7 @@ export default function HomePage(props) {
         small: 'mobile',
         medium: 'default'
     })
-    const poisElement = <Collection items={pois}>
+    const poisElement = <Collection items={pois} type={"list"}>
         {(item:iPoiCard & {id:string}, index) =>
             <POICard key={index}
                      className={"poiCard"}
