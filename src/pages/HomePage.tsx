@@ -1,4 +1,4 @@
-import {Home, POICard} from "../figma-components/index.js";
+import {Home, POICard} from "../ui-components/index.js";
 import React from "react";
 import {Image} from "@aws-amplify/ui-react";
 import {iPoiCard, items} from "../assets/mock-data.ts";
@@ -83,17 +83,9 @@ export default function HomePage() {
         }
     }
 
-    /*    // For showcase
-        const mapsImageOverrides = {
-            src: "src/assets/img.png"
-        }*/
     return <Home width={"100%"} overrides={{
         Navigation: navigationOverrides,
         LeftContainer: leftContainerOverrides,
         RightContainer: rightContainerOverrides,
-        /*        // For showcase
-                MapsImage: mapsImageOverrides,
-                card48461353: cardOverrides({image:"src/assets/img.png"}),
-                card48461368: cardOverrides({image:"src/assets/img.png"}),*/
     }}/>
 }
