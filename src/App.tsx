@@ -3,7 +3,7 @@ import './App.css'
 import React from "react";
 
 import output from '../amplify_outputs.json';
-import {Authenticator} from "@aws-amplify/ui-react";
+import HomePage from "./pages/HomePage.tsx";
 
 Amplify.configure(output);
 
@@ -12,6 +12,6 @@ export default function App() {
         /*<Authenticator>
             {({signOut})=> <HomePage signOut={signOut}/>}
         </Authenticator>*/
-        <></>
+            <HomePage />
     )
 }
