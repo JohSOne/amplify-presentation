@@ -7,8 +7,6 @@ import {generateClient} from "aws-amplify/api";
 import {MapView} from "@aws-amplify/ui-react-geo";
 import {Marker} from "react-map-gl";
 import {PoiCreateForm, PoiUpdateForm} from "../forms";
-import {IconClose} from "@aws-amplify/ui-react/internal";
-import {SignOut} from "@aws-amplify/ui-react/dist/types/components/Authenticator/Authenticator";
 
 const client = generateClient<Schema>({
     authMode: "userPool"
@@ -23,11 +21,10 @@ enum Dialog {
     Edit
 }
 
-export default function HomePage(props:{signOut:SignOut}) {
+export default function HomePage(props: {signOut:any}) {
     const [pois, setPois] = useState<Poi[]>([]);
-
+    console.log(pois)
     useEffect(() => {
-        console.log(client.models)
         const sub = client.models["Poi"].observeQuery().subscribe({
             next: ({items}) => {
                 setPois([...items]);
@@ -57,12 +54,14 @@ export default function HomePage(props:{signOut:SignOut}) {
         medium: 'default'
     })
 
-    function handleMarkOnMap(coordinates: string) {
-        setMarkerLocation({
-            latitude: Number(coordinates.split(",")[0]),
-            longitude: Number(coordinates.split(",")[1]),
-            zoom: 11
-        })
+    function handleMarkOnMap(coordinates: (string| undefined|null)) {
+        if (coordinates != null) {
+            setMarkerLocation({
+                latitude: Number(coordinates.split(",")[0]),
+                longitude: Number(coordinates.split(",")[1]),
+                zoom: 11
+            })
+        }
     }
 
     function handleDelte(id: string) {
@@ -85,7 +84,7 @@ export default function HomePage(props:{signOut:SignOut}) {
         props.signOut()
     }
 
-    const cardOverrides = (props: iPoiCard & { id: string }) => {
+    const cardOverrides = (props: Poi) => {
         return {
             className: "poiCard",
             overrides: {
@@ -115,16 +114,9 @@ export default function HomePage(props:{signOut:SignOut}) {
         }
     }
 
-    const cardCollection = pois.map((item: iPoiCard & { id: string }, index) =>
+    const cardCollection = pois.map((item: Poi, index) =>
         <POICard key={index}
-                 {...cardOverrides({
-                     coordinates: item.coordinates,
-                     image: item.image,
-                     title: item.title,
-                     aboveTitle: item.aboveTitle,
-                     contentText: item.contentText,
-                     id: item.id
-                 })}
+                 {...cardOverrides(item)}
         ></POICard>
     )
 
@@ -175,9 +167,7 @@ export default function HomePage(props:{signOut:SignOut}) {
     return <>
         {showDialog.show &&
             <Card variation={"elevated"}
-                  direction={"column"}
                   width={500}
-                  gap={"unset"}
                   position={"fixed"}
                   style={{zIndex: "1", transform: "translate(-50%, -50%)"}}
                   top={"50%"}
@@ -190,14 +180,18 @@ export default function HomePage(props:{signOut:SignOut}) {
                     </Heading>
                     <Button variation={"warning"}
                             onClick={() => setShowDialog({...showDialog, show: false})}>
-                        <IconClose/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             className="bi bi-x-square-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>
+                        </svg>
                     </Button>
                 </Flex>
                 {dialogSet.component}
             </Card>
         }
         <Home width={"100%"} height={"100vh"} overrides={{
-            MainContainer:mainContainerOverrides,
+            MainContainer: mainContainerOverrides,
             Navigation: navigationOverrides,
             LeftContainer: leftContainerOverrides,
             RightContainer: rightContainerOverrides,
