@@ -69,7 +69,7 @@ export default function HomePage() {
         children: cardCollection
     }
     const leftContainerOverrides = {
-        children: <Image src={"assets/img.png"} width={"100%"} height={"100%"} alt={"maps-image"}/>
+        children: <Image src={"/img.png"} width={"100%"} height={"100%"} alt={"maps-image"}/>
     }
     const navigationOverrides = {
         width: "100%",
